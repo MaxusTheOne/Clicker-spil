@@ -23,11 +23,17 @@ img {
 #game_background {
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  /* background-image: url(svg/baggrund.svg);
-    background-size: cover; */
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background-color: #000;
+  background-image: url(images/wooden-floor-1573219179k8J.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-attachment: fixed;
+  overflow: hidden;
+  z-index: 0;
 }
 #level_complete {
   width: 100%;
