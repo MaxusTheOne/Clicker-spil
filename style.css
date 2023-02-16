@@ -25,15 +25,11 @@ img {
   height: 100%;
   margin: 0;
   padding: 0;
-  position: relative;
-  background-color: #000;
+  position: absolute;
+  background-color: #b10b0b;
   background-image: url(images/wooden-floor-1573219179k8J.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  background-attachment: fixed;
-  overflow: hidden;
-  z-index: 0;
+  z-index: -1;
 }
 #level_complete {
   width: 100%;
@@ -48,4 +44,19 @@ img {
   position: absolute;
   top: 0%;
   left: 0%;
+}
+#cookie_container {
+  width: 10%;
+  height: 10%;
+}
+@keyframes jump {
+  0% {
+    translate: (0, 0);
+  }
+  50% {
+    translate: (400%, 0);
+  }
+  100% {
+    translate: (-400, 0);
+  }
 }
