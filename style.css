@@ -68,23 +68,23 @@ img {
 #cookie_container1,
 #cookie_container2,
 #cookie_container3 {
-  animation-name: spin;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-direction: alternate-reverse;
   position: absolute;
   width: 10%;
   top: 50%;
   left: -15%;
 }
 #cookie_container2 {
-  animation-delay: 3s;
   top: 20%;
 }
 #cookie_container3 {
-  animation-delay: 1s;
   top: 70%;
+}
+.roll {
+  animation-name: spin;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate-reverse;
 }
 
 @keyframes spin {
