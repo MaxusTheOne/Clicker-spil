@@ -1,7 +1,7 @@
-/* html {
-  width: 100%;
-  height: 100%;
-} */
+body {
+  margin: 0;
+  overflow: hidden;
+}
 #screen {
   position: relative;
   width: 100%;
@@ -56,26 +56,41 @@ img {
   left: 88%;
 }
 #time_board {
+  position: absolute;
   width: 14%;
   height: 14%;
-  top: 1%;
-  left: 10%;
+  top: -3%;
+  left: -1%;
 }
-#cookie_container {
+#cookie_img {
+  filter: drop-shadow(30px 1px 16px #000);
+}
+#cookie_container1,
+#cookie_container2,
+#cookie_container3 {
+  animation-name: spin;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate-reverse;
   position: absolute;
   width: 10%;
-  height: 10%;
   top: 50%;
-  left: 50%;
+  left: -15%;
 }
-@keyframes jump {
-  0% {
-    translate: (0, 0);
-  }
-  50% {
-    translate: (400%, 0);
-  }
+#cookie_container2 {
+  animation-delay: 3s;
+  top: 20%;
+}
+#cookie_container3 {
+  animation-delay: 1s;
+  top: 70%;
+}
+
+@keyframes spin {
   100% {
-    translate: (-400, 0);
+    rotate: 720deg;
+    transform: translate(1200%, 0%);
+    transform-origin: 1250% 50%;
   }
 }
