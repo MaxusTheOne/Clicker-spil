@@ -1,11 +1,13 @@
 body {
   margin: 0;
   overflow: hidden;
+  pointer-events: none;
 }
 #screen {
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;
+  pointer-events: none;
 }
 img {
   width: 100%;
@@ -33,7 +35,11 @@ img {
   background-color: #b10b0b;
   background-image: url(images/wooden-floor-1573219179k8J.jpg);
   background-size: cover;
-  z-index: -1;
+  pointer-events: none;
+}
+#cookie_container_container * {
+  position: relative;
+  pointer-events: all;
 }
 #level_complete {
   width: 100%;
@@ -41,6 +47,7 @@ img {
   position: absolute;
   top: 0%;
   left: 0%;
+  pointer-events: none;
 }
 #game_over {
   width: 100%;
@@ -48,6 +55,7 @@ img {
   position: absolute;
   top: 0%;
   left: 0%;
+  pointer-events: none;
 }
 #score_board {
   position: absolute;
@@ -103,7 +111,6 @@ img {
   animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-delay: 1s;
 }
 @keyframes clicked {
   0% {

@@ -12,17 +12,17 @@
       <div id="game">
         <div id="game_background"></div>
         <div id="game_elements">
-          <div id="cookie_container1" class="roll pause">
-            <img src="images/SmallCookie.png" class="cookie_img clicked" />
+          <div id="cookie_container_container">
+            <div id="cookie_container1" class="roll">
+              <img src="images/SmallCookie.png" id="cookie_img1" class="cookie_img" />
+            </div>
+            <div id="cookie_container2" class="roll">
+              <img src="images/SmallCookie.png" id="cookie_img2" class="cookie_img" />
+            </div>
+            <div id="cookie_container3" class="roll bad_cookie">
+              <img src="images/SmallCookie.png" id="cookie_img3" class="cookie_img" />
+            </div>
           </div>
-          <div id="cookie_container2" class="roll">
-            <img src="images/SmallCookie.png" class="cookie_img" />
-          </div>
-          <div id="cookie_container3" class="roll bad_cookie">
-            <img src="images/SmallCookie.png" class="cookie_img" />
-          </div>
-          <div id="moldy_cookie_container"></div>
-          <div id="cookie_container_container"></div>
         </div>
         <div id="game_ui">
           <div id="score_board" class="wiggle">
@@ -31,7 +31,6 @@
           <div id="life_board"></div>
           <div id="time_board" class="timer_container">
             <img src="images/Timer_cookie.png" class="timer" />
-            <!-- <img src="images/Timer_cookie.png" class="timer" /> -->
           </div>
         </div>
       </div>
@@ -39,6 +38,6 @@
       <div id="game_over"></div>
       <div id="level_complete"></div>
     </div>
-    <!-- <script src=""></script> -->
+    <script src="script.js"></script>
   </body>
 </html>
