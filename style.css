@@ -57,8 +57,8 @@ img {
 }
 #time_board {
   position: absolute;
-  width: 22%;
-  height: 32%;
+  width: 12%;
+  height: 12%;
   top: -3%;
   left: -1%;
 }
@@ -79,7 +79,9 @@ img {
 #cookie_container3 {
   top: 70%;
 }
-
+.bad_cookie {
+  filter: hue-rotate(90deg);
+}
 .roll {
   animation-name: spin;
   animation-duration: 3s;
@@ -131,12 +133,6 @@ img {
     transform: rotate(15deg);
   }
 }
-.timer_container {
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-}
-.timer {
-  top: 5%;
-  left: 5%;
+.pause {
+  animation-play-state: paused;
 }
