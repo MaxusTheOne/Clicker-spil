@@ -1,5 +1,5 @@
 //Begyndelsen af script
-
+"use stricks";
 //får cookien til at forsvinde når de bliver klikket
 function cookieClicker(cookieNum) {
   console.log("cookie" + cookieNum + " Clicked");
