@@ -1,5 +1,22 @@
 //Begyndelsen af script
-"use stricks";
+"use strict";
+
+//definer variabler
+let score = 0;
+window.addEventListener("load", start);
+
+//start function
+function start() {
+  //Click listeners
+  document.querySelector("#cookie_container1").addEventListener("mousedown", cookieClick1);
+  document.querySelector("#cookie_container2").addEventListener("mousedown", cookieClick2);
+  document.querySelector("#cookie_container3").addEventListener("mousedown", cookieClick3);
+
+  //Animation end listeners
+  document.querySelector("#cookie_container1").addEventListener("animationend", startCookie1);
+  document.querySelector("#cookie_container2").addEventListener("animationend", startCookie2);
+  document.querySelector("#cookie_container3").addEventListener("animationend", startCookie3);
+}
 //får cookien til at forsvinde når de bliver klikket
 function cookieClicker(cookieNum) {
   console.log("cookie" + cookieNum + " Clicked");
@@ -8,6 +25,8 @@ function cookieClicker(cookieNum) {
     .removeEventListener("mousedown", window["cookieClick" + cookieNum]);
   document.querySelector("#cookie_container" + cookieNum).classList.add("pause");
   document.querySelector("#cookie_img" + cookieNum).classList.add("clicked");
+  score++;
+  updateScore();
 }
 
 //starter cookies op igen
@@ -18,7 +37,6 @@ function startCookie(cookieNum) {
   document.querySelector("#cookie_container" + cookieNum).classList.remove("pause");
   document.querySelector("#cookie_img" + cookieNum).classList.remove("clicked");
   document.querySelector("#cookie_container" + cookieNum).classList.add("roll");
-
   document
     .querySelector("#cookie_container" + cookieNum)
     .addEventListener("mousedown", window["cookieClick" + cookieNum]);
@@ -42,16 +60,6 @@ function startCookie2() {
 function startCookie3() {
   startCookie(3);
 }
-function start() {
-  //Click listeners
-  document.querySelector("#cookie_container1").addEventListener("mousedown", cookieClick1);
-  document.querySelector("#cookie_container2").addEventListener("mousedown", cookieClick2);
-  document.querySelector("#cookie_container3").addEventListener("mousedown", cookieClick3);
-
-  //Animation end listeners
-  document.querySelector("#cookie_container1").addEventListener("animationend", startCookie1);
-  document.querySelector("#cookie_container2").addEventListener("animationend", startCookie2);
-  document.querySelector("#cookie_container3").addEventListener("animationend", startCookie3);
+function updateScore() {
+  document.querySelector("#scoreNum").textContent = score;
 }
-//start
-window.addEventListener("load", start);
