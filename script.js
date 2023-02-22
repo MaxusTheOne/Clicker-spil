@@ -26,9 +26,12 @@ function cookieClicker(cookieNum) {
     .removeEventListener("mousedown", window["cookieClick" + cookieNum]);
   document.querySelector("#cookie_container" + cookieNum).classList.add("pause");
   document.querySelector("#cookie_img" + cookieNum).classList.add("clicked");
-  score++;
-  updateScore();
-  removeLives();
+  if (document.querySelector("#cookie_container" + cookieNum).classList.contains("bad_cookie")) {
+    removeLives();
+  } else {
+    score++;
+    updateScore();
+  }
 }
 
 //starter cookies op igen

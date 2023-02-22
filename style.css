@@ -172,3 +172,23 @@ img {
 .pause {
   animation-play-state: paused;
 }
+.cookie {
+  width: 100px;
+  height: 100px;
+  background-image: url("images/Timer_cookie.png");
+  background-size: cover;
+}
+.cookie_timer {
+  animation-name: cookie-disappear;
+  animation-duration: 20s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+@keyframes cookie-disappear {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+  }
+}
