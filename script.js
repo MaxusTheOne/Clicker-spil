@@ -3,6 +3,7 @@
 
 //definer variabler
 let score = 0;
+let lives = 3;
 window.addEventListener("load", start);
 
 //start function
@@ -27,6 +28,7 @@ function cookieClicker(cookieNum) {
   document.querySelector("#cookie_img" + cookieNum).classList.add("clicked");
   score++;
   updateScore();
+  removeLives();
 }
 
 //starter cookies op igen
@@ -40,7 +42,15 @@ function startCookie(cookieNum) {
   document
     .querySelector("#cookie_container" + cookieNum)
     .addEventListener("mousedown", window["cookieClick" + cookieNum]);
+  document.querySelector("#cookie_container" + cookieNum);
 }
+
+//fjern liv
+function removeLives() {
+  document.querySelector("#heart" + lives).classList.add("clicked");
+  lives--;
+}
+
 //idk hvordan jeg gør det uden de her
 function cookieClick1() {
   cookieClicker(1);
