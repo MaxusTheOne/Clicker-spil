@@ -1,12 +1,13 @@
 //Begyndelsen af script
 "use strict";
 
+//start function
+window.addEventListener("load", start);
 //definer variabler
 let score = 0;
 let lives = 3;
-window.addEventListener("load", start);
+let timer_state = 1;
 
-//start function
 function start() {
   //Click listeners
   document.querySelector("#cookie_container1").addEventListener("mousedown", cookieClick1);
@@ -17,7 +18,27 @@ function start() {
   document.querySelector("#cookie_container1").addEventListener("animationend", startCookie1);
   document.querySelector("#cookie_container2").addEventListener("animationend", startCookie2);
   document.querySelector("#cookie_container3").addEventListener("animationend", startCookie3);
+  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
 }
+//timer animation hjælper
+function timerStep() {
+  console.log("timerStep start");
+  document
+    .querySelector("#timer_cookie" + timer_state)
+    .removeEventListener("animationend", timerStep);
+  if (timer_state < 13) {
+    console.log("is under 13 time_state");
+    timer_state++;
+    console.log(timer_state);
+    document.querySelector("#timer_cookie" + timer_state).classList.add("cookie_timer");
+    document
+      .querySelector("#timer_cookie" + timer_state)
+      .addEventListener("animationend", timerStep);
+  } else {
+    endGame();
+  }
+}
+
 //får cookien til at forsvinde når de bliver klikket
 function cookieClicker(cookieNum) {
   console.log("cookie" + cookieNum + " Clicked");
@@ -46,12 +67,35 @@ function startCookie(cookieNum) {
     .querySelector("#cookie_container" + cookieNum)
     .addEventListener("mousedown", window["cookieClick" + cookieNum]);
   document.querySelector("#cookie_container" + cookieNum);
+  if (score >= 10) {
+    level_complete();
+  }
 }
 
 //fjern liv
 function removeLives() {
   document.querySelector("#heart" + lives).classList.add("clicked");
   lives--;
+  if (lives <= 0) {
+    game_over();
+  }
+}
+
+//end game
+function endGame() {
+  if (score < 10) {
+    game_over();
+  } else {
+    level_complete();
+  }
+}
+
+//level complete
+function level_complete() {
+  document.querySelector("#level_complete").classList.remove("hidden");
+}
+function game_over() {
+  document.querySelector("#game_over").classList.remove("hidden");
 }
 
 //idk hvordan jeg gør det uden de her

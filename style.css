@@ -115,6 +115,30 @@ img {
 #cookie_container3 {
   top: 70%;
 }
+#game_over {
+  grid-area: 1 /1;
+  z-index: 999;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background-image: linear-gradient(150deg, #c90303 0%, #790909 100%);
+  color: #ffffff;
+}
+
+#level_complete {
+  grid-area: 1 /1;
+  z-index: 999;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background-image: url(images/cookie_wall.png);
+  color: #ffffff;
+}
+.hidden,
+#game_over.hidden,
+#level_complete.hidden {
+  display: none;
+}
 .bad_cookie {
   filter: hue-rotate(90deg);
 }
@@ -178,17 +202,21 @@ img {
   background-image: url("images/Timer_cookie.png");
   background-size: cover;
 }
+#time_board * {
+  position: absolute;
+}
 .cookie_timer {
   animation-name: cookie-disappear;
-  animation-duration: 20s;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-timing-function: linear;
 }
 @keyframes cookie-disappear {
   0% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    filter: opacity(100%);
   }
   100% {
-    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+    filter: opacity(0%);
   }
 }
