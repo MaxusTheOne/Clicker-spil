@@ -23,17 +23,15 @@ function start() {
 //timer animation hjælper
 function timerStep() {
   console.log("timerStep start");
-  document
-    .querySelector("#timer_cookie" + timer_state)
-    .removeEventListener("animationend", timerStep);
+  let timer_cookie = document.querySelector("#timer_cookie" + timer_state);
+
+  timer_cookie.removeEventListener("animationend", timerStep);
   if (timer_state < 13) {
     console.log("is under 13 time_state");
     timer_state++;
     console.log(timer_state);
-    document.querySelector("#timer_cookie" + timer_state).classList.add("cookie_timer");
-    document
-      .querySelector("#timer_cookie" + timer_state)
-      .addEventListener("animationend", timerStep);
+    timer_cookie.classList.add("cookie_timer");
+    timer_cookie.addEventListener("animationend", timerStep);
   } else {
     endGame();
   }
@@ -42,12 +40,13 @@ function timerStep() {
 //får cookien til at forsvinde når de bliver klikket
 function cookieClicker(cookieNum) {
   console.log("cookie" + cookieNum + " Clicked");
-  document
-    .querySelector("#cookie_container" + cookieNum)
-    .removeEventListener("mousedown", window["cookieClick" + cookieNum]);
-  document.querySelector("#cookie_container" + cookieNum).classList.add("pause");
+  let cookie_container = document.querySelector("#cookie_container" + cookieNum);
+
+  cookie_container.removeEventListener("mousedown", window["cookieClick" + cookieNum]);
+  cookie_container.classList.add("pause");
   document.querySelector("#cookie_img" + cookieNum).classList.add("clicked");
-  if (document.querySelector("#cookie_container" + cookieNum).classList.contains("bad_cookie")) {
+
+  if (cookie_container.classList.contains("bad_cookie")) {
     removeLives();
   } else {
     score++;
@@ -112,6 +111,8 @@ function startCookie2() {
 function startCookie3() {
   startCookie(3);
 }
+
+//score updater
 function updateScore() {
   document.querySelector("#scoreNum").textContent = score;
 }

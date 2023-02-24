@@ -139,15 +139,21 @@ img {
 #level_complete.hidden {
   display: none;
 }
-.bad_cookie {
-  filter: hue-rotate(90deg);
-}
 .roll {
+  position: absolute;
   animation-name: spin;
   animation-duration: 3s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-direction: alternate-reverse;
+}
+.bad_cookie {
+  filter: hue-rotate(90deg);
+}
+.life_cookie {
+  filter: hue-rotate(300deg);
+  filter: brightness(200%);
+  animation-duration: 2s;
 }
 @keyframes spin {
   100% {
@@ -216,7 +222,11 @@ img {
   0% {
     filter: opacity(100%);
   }
-  100% {
+  99% {
     filter: opacity(0%);
+    transform: scale(100%);
+  }
+  100% {
+    transform: scale(0%);
   }
 }
