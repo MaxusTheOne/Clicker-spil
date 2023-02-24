@@ -29,6 +29,7 @@ function timerStep() {
   if (timer_state < 13) {
     console.log("is under 13 time_state");
     timer_state++;
+    timer_cookie = document.querySelector("#timer_cookie" + timer_state);
     console.log(timer_state);
     timer_cookie.classList.add("cookie_timer");
     timer_cookie.addEventListener("animationend", timerStep);
@@ -59,11 +60,16 @@ function startCookie(cookieNum) {
   console.log("cookie started");
   let cookie_container = document.querySelector("#cookie_container" + cookieNum);
   cookie_container.classList.remove("roll");
+  cookie_container.classList.remove("reverse");
   cookie_container.offsetLeft;
   cookie_container.classList.remove("pause");
   document.querySelector("#cookie_img" + cookieNum).classList.remove("clicked");
-  cookie_container.classList.add("roll");
   cookie_container.addEventListener("mousedown", window["cookieClick" + cookieNum]);
+  if (Math.floor(Math.random() * 2) == 1) {
+    cookie_container.classList.add("roll");
+  } else {
+    cookie_container.classList.add("reverse");
+  }
 }
 
 //fjern liv
@@ -87,6 +93,7 @@ function endGame() {
 //level complete
 function level_complete() {
   document.querySelector("#level_complete").classList.remove("hidden");
+  document.querySelector("#highscore").textContent = "Your score is: " + score;
 }
 function game_over() {
   document.querySelector("#game_over").classList.remove("hidden");

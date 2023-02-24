@@ -106,22 +106,16 @@ img {
 #cookie_container3 {
   position: absolute;
   width: 10%;
-  top: 50%;
   left: -15%;
 }
-#cookie_container2 {
-  top: 20%;
-}
-#cookie_container3 {
-  top: 70%;
-}
+
 #game_over {
   grid-area: 1 /1;
   z-index: 999;
   display: grid;
   justify-content: center;
   align-content: center;
-  background-image: linear-gradient(150deg, #c90303 0%, #790909 100%);
+  background-image: linear-gradient(150deg, #7d4747 0%, #790909 100%);
   color: #ffffff;
 }
 
@@ -147,13 +141,12 @@ img {
   animation-timing-function: linear;
   animation-direction: alternate-reverse;
 }
-.bad_cookie {
-  filter: hue-rotate(90deg);
-}
-.life_cookie {
-  filter: hue-rotate(300deg);
-  filter: brightness(200%);
-  animation-duration: 2s;
+.reverse {
+  animation-name: reverseSpin;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate-reverse;
 }
 @keyframes spin {
   100% {
@@ -161,6 +154,46 @@ img {
     transform: translateX(1200%);
     transform-origin: 1250% 50%;
   }
+}
+@keyframes reverseSpin {
+  0% {
+    rotate: 720deg;
+    transform: translateX(1200%);
+    transform-origin: 1250% 50%;
+  }
+}
+.path1 {
+  top: 15%;
+}
+.path2 {
+  top: 25%;
+}
+.path3 {
+  top: 25%;
+}
+.path4 {
+  top: 35%;
+}
+.path5 {
+  top: 45%;
+}
+.path6 {
+  top: 55%;
+}
+.path7 {
+  top: 65%;
+}
+.path8 {
+  top: 75%;
+}
+
+.bad_cookie {
+  filter: hue-rotate(90deg);
+}
+.life_cookie {
+  filter: hue-rotate(300deg);
+  filter: brightness(200%);
+  animation-duration: 2s;
 }
 
 .clicked {
