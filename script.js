@@ -58,18 +58,13 @@ function cookieClicker(cookieNum) {
 //starter cookies op igen
 function startCookie(cookieNum) {
   console.log("cookie started");
-  document.querySelector("#cookie_container" + cookieNum).classList.remove("roll");
-  document.querySelector("#cookie_container" + cookieNum).offsetLeft;
-  document.querySelector("#cookie_container" + cookieNum).classList.remove("pause");
+  let cookie_container = document.querySelector("#cookie_container" + cookieNum);
+  cookie_container.classList.remove("roll");
+  cookie_container.offsetLeft;
+  cookie_container.classList.remove("pause");
   document.querySelector("#cookie_img" + cookieNum).classList.remove("clicked");
-  document.querySelector("#cookie_container" + cookieNum).classList.add("roll");
-  document
-    .querySelector("#cookie_container" + cookieNum)
-    .addEventListener("mousedown", window["cookieClick" + cookieNum]);
-  document.querySelector("#cookie_container" + cookieNum);
-  if (score >= 10) {
-    level_complete();
-  }
+  cookie_container.classList.add("roll");
+  cookie_container.addEventListener("mousedown", window["cookieClick" + cookieNum]);
 }
 
 //fjern liv
