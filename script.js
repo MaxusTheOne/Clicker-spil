@@ -9,6 +9,11 @@ let lives = 3;
 let timer_state = 1;
 
 function start() {
+  //assign classes
+  assignPaths(document.querySelector("#cookie_container1"));
+  assignPaths(document.querySelector("#cookie_container2"));
+  assignPaths(document.querySelector("#cookie_container3"));
+
   //Click listeners
   document.querySelector("#cookie_container1").addEventListener("mousedown", cookieClick1);
   document.querySelector("#cookie_container2").addEventListener("mousedown", cookieClick2);
@@ -61,14 +66,56 @@ function startCookie(cookieNum) {
   let cookie_container = document.querySelector("#cookie_container" + cookieNum);
   cookie_container.classList.remove("roll");
   cookie_container.classList.remove("reverse");
+  removePaths(cookie_container);
+
   cookie_container.offsetLeft;
   cookie_container.classList.remove("pause");
   document.querySelector("#cookie_img" + cookieNum).classList.remove("clicked");
   cookie_container.addEventListener("mousedown", window["cookieClick" + cookieNum]);
+  assignPaths(cookie_container);
+}
+function removePaths(cookieObj) {
+  cookieObj.classList.remove("path1");
+  cookieObj.classList.remove("path2");
+  cookieObj.classList.remove("path3");
+  cookieObj.classList.remove("path4");
+  cookieObj.classList.remove("path5");
+  cookieObj.classList.remove("path6");
+  cookieObj.classList.remove("path7");
+  cookieObj.classList.remove("path8");
+}
+
+function assignPaths(cookieObj) {
   if (Math.floor(Math.random() * 2) == 1) {
-    cookie_container.classList.add("roll");
+    cookieObj.classList.add("roll");
   } else {
-    cookie_container.classList.add("reverse");
+    cookieObj.classList.add("reverse");
+  }
+  switch (Math.floor(Math.random() * 8)) {
+    case 1:
+      cookieObj.classList.add("path1");
+      break;
+    case 2:
+      cookieObj.classList.add("path2");
+      break;
+    case 3:
+      cookieObj.classList.add("path3");
+      break;
+    case 4:
+      cookieObj.classList.add("path4");
+      break;
+    case 5:
+      cookieObj.classList.add("path5");
+      break;
+    case 6:
+      cookieObj.classList.add("path6");
+      break;
+    case 7:
+      cookieObj.classList.add("path7");
+      break;
+    case 0:
+      cookieObj.classList.add("path8");
+      break;
   }
 }
 
