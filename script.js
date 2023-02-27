@@ -11,30 +11,40 @@ let timer_state = 1;
 let cookieObj1 = document.querySelector("#cookie_container1");
 let cookieObj2 = document.querySelector("#cookie_container2");
 let cookieObj3 = document.querySelector("#cookie_container3");
+let cookieObj4 = document.querySelector("#cookie_container4");
+let cookieObj5 = document.querySelector("#cookie_container5");
+let cookieObj6 = document.querySelector("#cookie_container6");
 function start() {
   //assign classes
-  assignPaths(cookieObj1);
-  assignPaths(cookieObj2);
-  assignPaths(cookieObj3);
+  assignStartClass(cookieObj1);
+  assignStartClass(cookieObj2);
+  assignStartClass(cookieObj3);
+  assignStartClass(cookieObj4);
+  assignStartClass(cookieObj5);
+  assignStartClass(cookieObj6);
 
-  assignType(cookieObj1);
-  assignType(cookieObj2);
-  assignType(cookieObj3);
-
-  startEventListernes();
+  //assign events
+  startEventListernes(cookieObj1);
+  startEventListernes(cookieObj2);
+  startEventListernes(cookieObj3);
+  startEventListernes(cookieObj4);
+  startEventListernes(cookieObj5);
+  startEventListernes(cookieObj6);
+  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
 }
 
-function startEventListernes() {
+function assignStartClass(cookieObj) {
+  assignPaths(cookieObj);
+
+  assignType(cookieObj);
+}
+
+function startEventListernes(cookieObj) {
   //Animation end listeners
-  cookieObj1.addEventListener("animationend", startCookie);
-  cookieObj2.addEventListener("animationend", startCookie);
-  cookieObj3.addEventListener("animationend", startCookie);
-  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
+  cookieObj.addEventListener("animationend", startCookie);
 
   //Click listeners
-  cookieObj1.addEventListener("mousedown", cookieClicker);
-  cookieObj2.addEventListener("mousedown", cookieClicker);
-  cookieObj3.addEventListener("mousedown", cookieClicker);
+  cookieObj.addEventListener("mousedown", cookieClicker);
 }
 
 //timer animation hjælper
