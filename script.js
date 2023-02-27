@@ -17,6 +17,10 @@ function start() {
   assignPaths(cookieObj2);
   assignPaths(cookieObj3);
 
+  assignType(cookieObj1);
+  assignType(cookieObj2);
+  assignType(cookieObj3);
+
   startEventListernes();
 }
 
@@ -83,6 +87,7 @@ function startCookie() {
   cookie_container.querySelector("img").classList.remove("clicked");
   cookie_container.addEventListener("mousedown", cookieClicker);
   assignPaths(cookie_container);
+  assignType(cookie_container);
 }
 
 //remove paths
@@ -116,7 +121,9 @@ function removeTypes(cookieObj) {
 
 //assign type class
 function assignType(cookieObj) {
-  let randumNum = mat.floor(math.random() * 10) + 1;
+  removeTypes(cookieObj);
+
+  let randumNum = Math.floor(Math.random() * 10) + 1;
   if (randumNum == 1) {
     cookieObj.classList.add("life_cookie");
   } else if (randumNum <= 4) {

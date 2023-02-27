@@ -189,11 +189,13 @@ img {
 
 .bad_cookie {
   filter: hue-rotate(90deg);
+  animation-iteration-count: 1;
 }
 .life_cookie {
   filter: hue-rotate(300deg);
   filter: brightness(200%);
-  animation-duration: 2s;
+  animation-duration: 1s;
+  animation-iteration-count: 2;
 }
 
 .clicked {
