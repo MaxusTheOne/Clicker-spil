@@ -159,7 +159,7 @@ function addLives() {
 
 //end game
 function endGame() {
-  if (score < 10) {
+  if (score < 25) {
     game_over();
   } else {
     level_complete();
