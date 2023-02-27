@@ -17,17 +17,22 @@ function start() {
   assignPaths(cookieObj2);
   assignPaths(cookieObj3);
 
-  //Click listeners
-  cookieObj1.addEventListener("mousedown", cookieClick1);
-  cookieObj2.addEventListener("mousedown", cookieClick2);
-  cookieObj3.addEventListener("mousedown", cookieClick3);
-
-  //Animation end listeners
-  cookieObj1.addEventListener("animationend", startCookie1);
-  cookieObj2.addEventListener("animationend", startCookie2);
-  cookieObj3.addEventListener("animationend", startCookie3);
-  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
+  startEventListernes();
 }
+
+function startEventListernes() {
+  //Animation end listeners
+  cookieObj1.addEventListener("animationend", startCookie);
+  cookieObj2.addEventListener("animationend", startCookie);
+  cookieObj3.addEventListener("animationend", startCookie);
+  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
+
+  //Click listeners
+  cookieObj1.addEventListener("mousedown", cookieClicker);
+  cookieObj2.addEventListener("mousedown", cookieClicker);
+  cookieObj3.addEventListener("mousedown", cookieClicker);
+}
+
 //timer animation hjælper
 function timerStep() {
   let timer_cookie = document.querySelector("#timer_cookie" + timer_state);
@@ -44,13 +49,12 @@ function timerStep() {
 }
 
 //får cookien til at forsvinde når de bliver klikket
-function cookieClicker(cookieNum) {
-  console.log("cookie" + cookieNum + " Clicked");
-  let cookie_container = document.querySelector("#cookie_container" + cookieNum);
-
-  cookie_container.removeEventListener("mousedown", window["cookieClick" + cookieNum]);
+function cookieClicker() {
+  let cookie_container = this;
+  console.log(this);
+  cookie_container.removeEventListener("mousedown", cookieClicker);
   cookie_container.classList.add("pause");
-  document.querySelector("#cookie_img" + cookieNum).classList.add("clicked");
+  cookie_container.querySelector("img").classList.add("clicked");
 
   if (cookie_container.classList.contains("bad_cookie")) {
     removeLives();
@@ -68,17 +72,16 @@ function cookieClicker(cookieNum) {
 }
 
 //starter cookies op igen
-function startCookie(cookieNum) {
+function startCookie() {
   console.log("cookie started");
-  let cookie_container = document.querySelector("#cookie_container" + cookieNum);
+  let cookie_container = this;
   removePaths(cookie_container);
-  cookie_container.classList.remove("roll");
-  cookie_container.classList.remove("reverse");
+  cookie_container.classList.remove("roll", "reverse");
 
   cookie_container.offsetLeft;
   cookie_container.classList.remove("pause");
-  document.querySelector("#cookie_img" + cookieNum).classList.remove("clicked");
-  cookie_container.addEventListener("mousedown", window["cookieClick" + cookieNum]);
+  cookie_container.querySelector("img").classList.remove("clicked");
+  cookie_container.addEventListener("mousedown", cookieClicker);
   assignPaths(cookie_container);
 }
 
@@ -107,10 +110,18 @@ function assignPaths(cookieObj) {
 }
 
 //remove type class
+function removeTypes(cookieObj) {
+  cookieObj.classList.remove("life_cookie", "bad_cookie");
+}
 
-//add type class
-function addType(cookieObj) {
-  let randumNum = mat.floor(math.random() * 3) + 1;
+//assign type class
+function assignType(cookieObj) {
+  let randumNum = mat.floor(math.random() * 10) + 1;
+  if (randumNum == 1) {
+    cookieObj.classList.add("life_cookie");
+  } else if (randumNum <= 4) {
+    cookieObj.classList.add("bad_cookie");
+  }
 }
 
 //remove a life
@@ -145,26 +156,6 @@ function level_complete() {
 }
 function game_over() {
   document.querySelector("#game_over").classList.remove("hidden");
-}
-
-//idk hvordan jeg gør det uden de her
-function cookieClick1() {
-  cookieClicker(1);
-}
-function cookieClick2() {
-  cookieClicker(2);
-}
-function cookieClick3() {
-  cookieClicker(3);
-}
-function startCookie1() {
-  startCookie(1);
-}
-function startCookie2() {
-  startCookie(2);
-}
-function startCookie3() {
-  startCookie(3);
 }
 
 //score updater
