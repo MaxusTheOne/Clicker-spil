@@ -19,6 +19,8 @@ let cookieObj6 = document.querySelector("#cookie_container6");
 
 //startscreen
 function load() {
+  gameState = "load";
+  initCookies();
   let startButton = document.querySelector("#startButton");
   document.querySelector("#start").classList.remove("hidden");
   startButton.addEventListener("click", start);
@@ -35,6 +37,13 @@ function start() {
   document.querySelector("#start").classList.add("hidden");
   gameState = "playing";
   //start cookies
+  initCookies();
+
+  document.querySelector("#timer_cookie1").classList.add("cookie_timer");
+  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
+}
+
+function initCookies() {
   startCookie.call(cookieObj1);
   startCookie.call(cookieObj2);
   startCookie.call(cookieObj3);
@@ -49,9 +58,6 @@ function start() {
   startEventListernes(cookieObj4);
   startEventListernes(cookieObj5);
   startEventListernes(cookieObj6);
-
-  document.querySelector("#timer_cookie1").classList.add("cookie_timer");
-  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
 }
 
 function assignStartClass(cookieObj) {
@@ -65,7 +71,7 @@ function startEventListernes(cookieObj) {
   cookieObj.addEventListener("animationend", startCookie);
 
   //Click listeners
-  cookieObj.addEventListener("mousedown", cookieClicker);
+  if (gameState != "load") cookieObj.addEventListener("mousedown", cookieClicker);
 }
 //timer animation hjælper
 function timerStep() {
@@ -207,7 +213,7 @@ function level_complete() {
   if (score > highscore) {
     highscore = score;
   }
-  document.querySelector("#highscore").textContent = "Highscore = " + highscore;
+  document.querySelector("#highscore").textContent = "Highscore: " + highscore;
   unloadGame();
 }
 

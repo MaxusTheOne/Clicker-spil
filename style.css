@@ -2,7 +2,9 @@ body {
   margin: 0;
   overflow: hidden;
   pointer-events: none;
-  text-shadow: 2px 2px black;
+}
+* {
+  user-select: none;
 }
 #screen {
   position: relative;
@@ -12,6 +14,10 @@ body {
 }
 img {
   width: 100%;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 #game {
   width: 100%;
@@ -50,6 +56,7 @@ img {
   background-size: 50%;
   background-image: url(images/StartImg.png);
   color: #ffffff;
+  text-shadow: 2px 2px black;
 }
 
 #level_complete {
