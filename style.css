@@ -2,6 +2,7 @@ body {
   margin: 0;
   overflow: hidden;
   pointer-events: none;
+  text-shadow: 2px 2px black;
 }
 #screen {
   position: relative;
@@ -40,6 +41,17 @@ img {
 #cookie_container_container * {
   pointer-events: all;
 }
+#start {
+  grid-area: 1 /1;
+  z-index: 999;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background-size: 50%;
+  background-image: url(images/StartImg.png);
+  color: #ffffff;
+}
+
 #level_complete {
   width: 100%;
   height: 100%;
@@ -123,12 +135,19 @@ img {
 }
 .hidden,
 #game_over.hidden,
-#level_complete.hidden {
+#level_complete.hidden,
+#start.hidden {
   display: none;
 }
 #gameOverRestart,
-#lvCompleteRestart {
+#lvCompleteRestart,
+#startButton {
   pointer-events: all;
+}
+#lvCompleteRestart {
+  height: auto;
+  width: 35%;
+  /* align-self: center; */
 }
 .cookie_container {
   position: absolute;

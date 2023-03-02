@@ -2,12 +2,13 @@
 "use strict";
 
 //start function
-window.addEventListener("load", start);
+window.addEventListener("load", load);
 //definer variabler
 let score = 0;
 let lives = 3;
 let timer_state = 1;
 let highscore = 0;
+let gameState;
 
 let cookieObj1 = document.querySelector("#cookie_container1");
 let cookieObj2 = document.querySelector("#cookie_container2");
@@ -15,13 +16,24 @@ let cookieObj3 = document.querySelector("#cookie_container3");
 let cookieObj4 = document.querySelector("#cookie_container4");
 let cookieObj5 = document.querySelector("#cookie_container5");
 let cookieObj6 = document.querySelector("#cookie_container6");
+
+//startscreen
+function load() {
+  let startButton = document.querySelector("#startButton");
+  document.querySelector("#start").classList.remove("hidden");
+  startButton.addEventListener("click", start);
+}
+
 function start() {
   //reset variables
   score = 0;
   lives = 3;
   timer_state = 1;
   updateScore();
-
+  //remove start screen
+  document.querySelector("#startButton").removeEventListener("click", start);
+  document.querySelector("#start").classList.add("hidden");
+  gameState = "playing";
   //start cookies
   startCookie.call(cookieObj1);
   startCookie.call(cookieObj2);
@@ -107,7 +119,9 @@ function startCookie() {
   cookie_container.offsetLeft;
   cookie_container.classList.remove("pause");
   cookie_container.querySelector("img").classList.remove("clicked");
-  cookie_container.addEventListener("mousedown", cookieClicker);
+  if (gameState != "load") {
+    cookie_container.addEventListener("mousedown", cookieClicker);
+  }
   assignPaths(cookie_container);
   assignType(cookie_container);
 }
@@ -189,22 +203,31 @@ function updateScore() {
 function level_complete() {
   document.querySelector("#level_complete").classList.remove("hidden");
   document.querySelector("#score").textContent = "Your score is: " + score;
-  document.querySelector("#lvCompleteRestart").addEventListener("click", restartGame);
+  document.querySelector("#lvCompleteRestart").addEventListener("click", startGame);
+  if (score > highscore) {
+    highscore = score;
+  }
+  document.querySelector("#highscore").textContent = "Highscore = " + highscore;
+  unloadGame();
 }
 
 //game over
 function game_over() {
   document.querySelector("#game_over").classList.remove("hidden");
-  document.querySelector("#gameOverRestart").addEventListener("click", restartGame);
+  document.querySelector("#gameOverRestart").addEventListener("click", startGame);
+  unloadGame();
 }
 
-function restartGame() {
-  console.log("restarting...");
-  document.querySelector("#gameOverRestart").removeEventListener("click", restartGame);
-  document.querySelector("#lvCompleteRestart").removeEventListener("click", restartGame);
+function startGame() {
+  document.querySelector("#gameOverRestart").removeEventListener("click", unloadGame);
+  document.querySelector("#lvCompleteRestart").removeEventListener("click", unloadGame);
   document.querySelector("#game_over").classList.add("hidden");
   document.querySelector("#level_complete").classList.add("hidden");
-
+  load();
+}
+function unloadGame() {
+  console.log("restarting...");
+  gameState = "load";
   document.querySelector("#timer_cookie1").classList.remove("cookie_timer");
   document.querySelector("#timer_cookie2").classList.remove("cookie_timer");
   document.querySelector("#timer_cookie3").classList.remove("cookie_timer");
@@ -218,9 +241,15 @@ function restartGame() {
   document.querySelector("#timer_cookie11").classList.remove("cookie_timer");
   document.querySelector("#timer_cookie12").classList.remove("cookie_timer");
   document.querySelector("#timer_cookie13").classList.remove("cookie_timer");
-  addLives();
-  addLives();
-  addLives();
 
-  start();
+  cookieObj1.removeEventListener("mousedown", cookieClicker);
+  cookieObj2.removeEventListener("mousedown", cookieClicker);
+  cookieObj3.removeEventListener("mousedown", cookieClicker);
+  cookieObj4.removeEventListener("mousedown", cookieClicker);
+  cookieObj5.removeEventListener("mousedown", cookieClicker);
+  cookieObj6.removeEventListener("mousedown", cookieClicker);
+
+  addLives();
+  addLives();
+  addLives();
 }
