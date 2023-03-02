@@ -126,6 +126,10 @@ img {
 #level_complete.hidden {
   display: none;
 }
+#gameOverRestart,
+#lvCompleteRestart {
+  pointer-events: all;
+}
 .cookie_container {
   position: absolute;
   width: 10%;
@@ -136,14 +140,14 @@ img {
   position: absolute;
   animation-name: spin;
   animation-duration: 3s;
-  animation-iteration-count: 3;
+  animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-direction: alternate-reverse;
 }
 .reverse {
   animation-name: reverseSpin;
   animation-duration: 3s;
-  animation-iteration-count: 3;
+  animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-direction: alternate-reverse;
 }

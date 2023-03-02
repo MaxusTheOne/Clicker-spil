@@ -7,6 +7,7 @@ window.addEventListener("load", start);
 let score = 0;
 let lives = 3;
 let timer_state = 1;
+let highscore = 0;
 
 let cookieObj1 = document.querySelector("#cookie_container1");
 let cookieObj2 = document.querySelector("#cookie_container2");
@@ -15,13 +16,19 @@ let cookieObj4 = document.querySelector("#cookie_container4");
 let cookieObj5 = document.querySelector("#cookie_container5");
 let cookieObj6 = document.querySelector("#cookie_container6");
 function start() {
-  //assign classes
-  assignStartClass(cookieObj1);
-  assignStartClass(cookieObj2);
-  assignStartClass(cookieObj3);
-  assignStartClass(cookieObj4);
-  assignStartClass(cookieObj5);
-  assignStartClass(cookieObj6);
+  //reset variables
+  score = 0;
+  lives = 3;
+  timer_state = 1;
+  updateScore();
+
+  //start cookies
+  startCookie.call(cookieObj1);
+  startCookie.call(cookieObj2);
+  startCookie.call(cookieObj3);
+  startCookie.call(cookieObj4);
+  startCookie.call(cookieObj5);
+  startCookie.call(cookieObj6);
 
   //assign events
   startEventListernes(cookieObj1);
@@ -30,6 +37,8 @@ function start() {
   startEventListernes(cookieObj4);
   startEventListernes(cookieObj5);
   startEventListernes(cookieObj6);
+
+  document.querySelector("#timer_cookie1").classList.add("cookie_timer");
   document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
 }
 
@@ -46,7 +55,6 @@ function startEventListernes(cookieObj) {
   //Click listeners
   cookieObj.addEventListener("mousedown", cookieClicker);
 }
-
 //timer animation hjælper
 function timerStep() {
   let timer_cookie = document.querySelector("#timer_cookie" + timer_state);
@@ -70,8 +78,11 @@ function cookieClicker() {
   cookie_container.classList.add("pause");
   cookie_container.querySelector("img").classList.add("clicked");
 
+  // bad cookie clicked
   if (cookie_container.classList.contains("bad_cookie")) {
     removeLives();
+
+    //good cookie clicked
   } else if (cookie_container.classList.contains("life_cookie")) {
     if (lives >= 3) {
       score += 5;
@@ -79,6 +90,7 @@ function cookieClicker() {
     } else {
       addLives();
     }
+    //else. a good cookie is clicked
   } else {
     score++;
     updateScore();
@@ -152,9 +164,11 @@ function removeLives() {
 
 //add a life
 function addLives() {
-  lives++;
-  let lifeObj = document.querySelector("#heart" + lives);
-  lifeObj.classList.remove("clicked");
+  if (lives < 3) {
+    lives++;
+    let lifeObj = document.querySelector("#heart" + lives);
+    lifeObj.classList.remove("clicked");
+  }
 }
 
 //end game
@@ -166,16 +180,47 @@ function endGame() {
   }
 }
 
-//level complete
-function level_complete() {
-  document.querySelector("#level_complete").classList.remove("hidden");
-  document.querySelector("#highscore").textContent = "Your score is: " + score;
-}
-function game_over() {
-  document.querySelector("#game_over").classList.remove("hidden");
-}
-
 //score updater
 function updateScore() {
   document.querySelector("#scoreNum").textContent = score;
+}
+
+//level complete
+function level_complete() {
+  document.querySelector("#level_complete").classList.remove("hidden");
+  document.querySelector("#score").textContent = "Your score is: " + score;
+  document.querySelector("#lvCompleteRestart").addEventListener("click", restartGame);
+}
+
+//game over
+function game_over() {
+  document.querySelector("#game_over").classList.remove("hidden");
+  document.querySelector("#gameOverRestart").addEventListener("click", restartGame);
+}
+
+function restartGame() {
+  console.log("restarting...");
+  document.querySelector("#gameOverRestart").removeEventListener("click", restartGame);
+  document.querySelector("#lvCompleteRestart").removeEventListener("click", restartGame);
+  document.querySelector("#game_over").classList.add("hidden");
+  document.querySelector("#level_complete").classList.add("hidden");
+
+  document.querySelector("#timer_cookie1").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie2").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie3").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie4").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie5").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie6").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie7").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie8").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie9").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie10").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie11").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie12").classList.remove("cookie_timer");
+  document.querySelector("#timer_cookie13").classList.remove("cookie_timer");
+  addLives();
+  addLives();
+  addLives();
+
+  start();
 }

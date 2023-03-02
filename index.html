@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coockers</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="images/SmallCookie.png" type="" />
   </head>
   <body>
     <div id="screen">
@@ -50,7 +51,7 @@
             </div>
           </div>
           <div id="time_board" class="timer_container">
-            <img src="images/cookie png.01.png" id="timer_cookie1" class="cookie_timer" />
+            <img src="images/cookie png.01.png" id="timer_cookie1" />
             <img src="images/cookie png.02.png" id="timer_cookie2" />
             <img src="images/cookie png.03.png" id="timer_cookie3" />
             <img src="images/cookie png.04.png" id="timer_cookie4" />
@@ -69,10 +70,13 @@
       <div id="start"></div>
       <div id="game_over" class="hidden">
         <h1>U frikking frik ╰（‵□′）╯</h1>
+        <button id="gameOverRestart">Restart!</button>
       </div>
       <div id="level_complete" class="hidden">
         <h1>Yay! ☆*: .｡. o(≧▽≦)o .｡.:*☆</h1>
-        <h2 id="highscore">Ahhhh</h2>
+        <h2 id="score">Ahhhh</h2>
+        <button id="lvCompleteRestart">Restart!</button>
+        <div id="highscore">Highscore=</div>
       </div>
     </div>
     <script src="script.js"></script>
