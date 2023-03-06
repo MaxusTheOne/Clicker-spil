@@ -9,6 +9,7 @@ let lives = 3;
 let timer_state = 1;
 let highscore = 0;
 let gameState;
+let requiredScore = 5;
 
 let cookieObj1 = document.querySelector("#cookie_container1");
 let cookieObj2 = document.querySelector("#cookie_container2");
@@ -24,6 +25,9 @@ function load() {
   let startButton = document.querySelector("#startButton");
   document.querySelector("#start").classList.remove("hidden");
   startButton.addEventListener("click", start);
+
+  //extra
+  document.querySelector("#transitionCookies").classList.add("hidden");
 }
 
 function start() {
@@ -38,6 +42,10 @@ function start() {
   gameState = "playing";
   //start cookies
   initCookies();
+
+  //start background music
+  document.querySelector("#bg_music").currentTime = 0;
+  document.querySelector("#bg_music").play();
 
   document.querySelector("#timer_cookie1").classList.add("cookie_timer");
   document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
@@ -95,7 +103,8 @@ function cookieClicker() {
   cookie_container.removeEventListener("mousedown", cookieClicker);
   cookie_container.classList.add("pause");
   cookie_container.querySelector("img").classList.add("clicked");
-
+  document.querySelector("#munch1").currentTime = 0;
+  document.querySelector("#munch1").play();
   // bad cookie clicked
   if (cookie_container.classList.contains("bad_cookie")) {
     removeLives();
@@ -193,7 +202,7 @@ function addLives() {
 
 //end game
 function endGame() {
-  if (score < 25) {
+  if (score < requiredScore) {
     game_over();
   } else {
     level_complete();
@@ -207,21 +216,43 @@ function updateScore() {
 
 //level complete
 function level_complete() {
-  document.querySelector("#level_complete").classList.remove("hidden");
   document.querySelector("#score").textContent = "Your score is: " + score;
+  document.querySelector("#transitionCookies").classList.remove("hidden");
+  document.querySelector("#gameOverCookie1").classList.add("cookieTransition");
+  document.querySelector("#gameOverCookie2").classList.add("cookieTransition");
   document.querySelector("#lvCompleteRestart").addEventListener("click", startGame);
+  document
+    .querySelector("#gameOverCookie2")
+    .addEventListener("animationend", showLevelCompleteScreen);
   if (score > highscore) {
     highscore = score;
   }
   document.querySelector("#highscore").textContent = "Highscore: " + highscore;
   unloadGame();
 }
+function showLevelCompleteScreen() {
+  document.querySelector("#gameOverCookie1").classList.remove("cookieTransition");
+  document.querySelector("#gameOverCookie2").classList.remove("cookieTransition");
+  document.querySelector("#gameOverCookie1").classList.add("clicked");
+  document.querySelector("#gameOverCookie2").classList.add("clicked");
+  document.querySelector("#level_complete").classList.remove("hidden");
+}
 
 //game over
 function game_over() {
-  document.querySelector("#game_over").classList.remove("hidden");
+  document.querySelector("#gameOverCookie1").classList.add("cookieTransition");
+  document.querySelector("#gameOverCookie2").classList.add("cookieTransition");
+  document.querySelector("#transitionCookies").classList.remove("hidden");
+  document.querySelector("#gameOverCookie2").addEventListener("animationend", showGameOverScreen);
   document.querySelector("#gameOverRestart").addEventListener("click", startGame);
   unloadGame();
+}
+function showGameOverScreen() {
+  document.querySelector("#gameOverCookie1").classList.remove("cookieTransition");
+  document.querySelector("#gameOverCookie2").classList.remove("cookieTransition");
+  document.querySelector("#gameOverCookie1").classList.add("clicked");
+  document.querySelector("#gameOverCookie2").classList.add("clicked");
+  document.querySelector("#game_over").classList.remove("hidden");
 }
 
 function startGame() {

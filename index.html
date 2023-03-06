@@ -9,9 +9,12 @@
     <link rel="icon" href="images/SmallCookie.png" type="" />
   </head>
   <body>
+    <audio src="audio/Munch1.mp4" id="munch1"></audio>
+    <audio src="audio/BgMusic.mp4" id="bg_music"></audio>
     <div id="screen">
       <div id="game">
         <div id="game_background"></div>
+        <!-- spil elemnter -->
         <div id="game_elements">
           <div id="cookie_container_container">
             <div id="cookie_container1" class="cookie_container">
@@ -34,6 +37,7 @@
             </div>
           </div>
         </div>
+        <!-- game ui -->
         <div id="game_ui">
           <div id="score_board" class="wiggle">
             <img src="images/6-65209_jar-clipart-empty-cookie-jar-clipart-removebg-preview.png" />
@@ -67,20 +71,25 @@
           </div>
         </div>
       </div>
+      <!-- Skærme -->
       <div id="start">
-       <h2>Cookers</h2>
-       <p>Få 25 point inden tiden løber ud, undgå at miste alle dine liv!</p>
-       <button id="startButton">Start</button>
+        <h2>Cookers</h2>
+        <p>Få 25 point inden tiden løber ud, undgå at miste alle dine liv!</p>
+        <button id="startButton">Start</button>
       </div>
       <div id="game_over" class="hidden">
         <h1>U frikking frik ╰（‵□′）╯</h1>
-        <button id="gameOverRestart">Restart!</button>
+        <img src="images/SadRestart.png" id="gameOverRestart" class="pulse" />
       </div>
       <div id="level_complete" class="hidden">
         <h1>Yay! ☆*: .｡. o(≧▽≦)o .｡.:*☆</h1>
         <h2 id="score">Ahhhh</h2>
-        <img src="images/RestartButton.png" id="lvCompleteRestart"></img>
+        <img src="images/HappyRestart.png" id="lvCompleteRestart" class="pulse" />
         <h3 id="highscore">Highscore=</h3>
+      </div>
+      <div id="transitionCookies">
+        <img src="images/SmallCookie.png" alt="gameOverCookie" id="gameOverCookie1" />
+        <img src="images/SmallCookie.png" alt="gameOverCookie2" id="gameOverCookie2" />
       </div>
     </div>
     <script src="script.js"></script>
