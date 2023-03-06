@@ -126,7 +126,6 @@ function cookieClicker() {
 
 //starter cookies op igen
 function startCookie() {
-  console.log("cookie started");
   let cookie_container = this;
   removePaths(cookie_container);
   cookie_container.classList.remove("roll", "reverse");
@@ -231,6 +230,9 @@ function level_complete() {
   unloadGame();
 }
 function showLevelCompleteScreen() {
+  document.querySelector("#bg_music").pause();
+  document.querySelector("#yay").currentTime = 0;
+  document.querySelector("#yay").play();
   document.querySelector("#gameOverCookie1").classList.remove("cookieTransition");
   document.querySelector("#gameOverCookie2").classList.remove("cookieTransition");
   document.querySelector("#gameOverCookie1").classList.add("clicked");
@@ -248,6 +250,7 @@ function game_over() {
   unloadGame();
 }
 function showGameOverScreen() {
+  document.querySelector("#bg_music").pause();
   document.querySelector("#gameOverCookie1").classList.remove("cookieTransition");
   document.querySelector("#gameOverCookie2").classList.remove("cookieTransition");
   document.querySelector("#gameOverCookie1").classList.add("clicked");
