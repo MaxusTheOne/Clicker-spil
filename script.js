@@ -99,7 +99,6 @@ function timerStep() {
 //får cookien til at forsvinde når de bliver klikket
 function cookieClicker() {
   let cookie_container = this;
-  console.log(this);
   cookie_container.removeEventListener("mousedown", cookieClicker);
   cookie_container.classList.add("pause");
   cookie_container.querySelector("img").classList.add("clicked");
@@ -201,20 +200,24 @@ function addLives() {
 
 //end game
 function endGame() {
-  if (score < requiredScore) {
+  if (score < requiredScore && gameState != "end") {
     game_over();
   } else {
+    console.log("Spillet er vundet, vi har " + score + " points");
     level_complete();
   }
 }
 
 //score updater
 function updateScore() {
+  console.log("scoreUp");
   document.querySelector("#scoreNum").textContent = score;
 }
 
 //level complete
 function level_complete() {
+  console.log("level_complete");
+  gameState = "end";
   document.querySelector("#score").textContent = "Your score is: " + score;
   document.querySelector("#transitionCookies").classList.remove("hidden");
   document.querySelector("#gameOverCookie1").classList.add("cookieTransition");
@@ -230,9 +233,16 @@ function level_complete() {
   unloadGame();
 }
 function showLevelCompleteScreen() {
+  console.log("ShowLevelCompleteScreen");
+  //audio
   document.querySelector("#bg_music").pause();
   document.querySelector("#yay").currentTime = 0;
   document.querySelector("#yay").play();
+
+  document
+    .querySelector("#gameOverCookie2")
+    .removeEventListener("animationend", showLevelCompleteScreen);
+
   document.querySelector("#gameOverCookie1").classList.remove("cookieTransition");
   document.querySelector("#gameOverCookie2").classList.remove("cookieTransition");
   document.querySelector("#gameOverCookie1").classList.add("clicked");
@@ -242,6 +252,7 @@ function showLevelCompleteScreen() {
 
 //game over
 function game_over() {
+  gameState = "end";
   document.querySelector("#gameOverCookie1").classList.add("cookieTransition");
   document.querySelector("#gameOverCookie2").classList.add("cookieTransition");
   document.querySelector("#transitionCookies").classList.remove("hidden");
@@ -250,7 +261,13 @@ function game_over() {
   unloadGame();
 }
 function showGameOverScreen() {
+  //audio
   document.querySelector("#bg_music").pause();
+  document.querySelector("#cry").currentTime = 0;
+  document.querySelector("#cry").play();
+  document
+    .querySelector("#gameOverCookie2")
+    .removeEventListener("animationend", showGameOverScreen);
   document.querySelector("#gameOverCookie1").classList.remove("cookieTransition");
   document.querySelector("#gameOverCookie2").classList.remove("cookieTransition");
   document.querySelector("#gameOverCookie1").classList.add("clicked");
