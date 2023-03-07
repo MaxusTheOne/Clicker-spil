@@ -9,7 +9,7 @@ let lives = 3;
 let timer_state = 1;
 let highscore = 0;
 let gameState;
-let requiredScore = 5;
+let requiredScore = 25;
 
 let cookieObj1 = document.querySelector("#cookie_container1");
 let cookieObj2 = document.querySelector("#cookie_container2");
