@@ -68,12 +68,6 @@ function initCookies() {
   startEventListernes(cookieObj6);
 }
 
-function assignStartClass(cookieObj) {
-  assignPaths(cookieObj);
-
-  assignType(cookieObj);
-}
-
 function startEventListernes(cookieObj) {
   //Animation end listeners
   cookieObj.addEventListener("animationend", startCookie);
@@ -200,7 +194,7 @@ function addLives() {
 
 //end game
 function endGame() {
-  if (score < requiredScore && gameState != "end") {
+  if (score < requiredScore) {
     game_over();
   } else {
     console.log("Spillet er vundet, vi har " + score + " points");
