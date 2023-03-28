@@ -179,19 +179,19 @@ img {
   animation-timing-function: linear;
   animation-direction: alternate-reverse;
 }
-.reverse {
-  animation-name: reverseSpin;
-  animation-duration: 3s;
-  animation-iteration-count: 1;
-  animation-timing-function: linear;
-  animation-direction: alternate-reverse;
-}
 @keyframes spin {
   100% {
     rotate: 720deg;
     transform: translateX(1200%);
     transform-origin: 1250% 50%;
   }
+}
+.reverse {
+  animation-name: reverseSpin;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-direction: alternate-reverse;
 }
 @keyframes reverseSpin {
   0% {
