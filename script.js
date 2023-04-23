@@ -185,20 +185,20 @@ function endGame() {
   if (score < requiredScore) {
     game_over();
   } else {
-    console.log("Spillet er vundet, vi har " + score + " points");
+    // console.log("Spillet er vundet, vi har " + score + " points");
     level_complete();
   }
 }
 
 //score updater
 function updateScore() {
-  console.log("scoreUp");
+  // console.log("scoreUp");
   document.querySelector("#scoreNum").textContent = score;
 }
 
 //level complete
 function level_complete() {
-  console.log("level_complete");
+  // console.log("level_complete");
   gameState = "end";
   document.querySelector("#score").textContent = "Your score is: " + score;
   document.querySelector("#transitionCookies").classList.remove("hidden");
@@ -213,7 +213,7 @@ function level_complete() {
   unloadGame();
 }
 function showLevelCompleteScreen() {
-  console.log("ShowLevelCompleteScreen");
+  // console.log("ShowLevelCompleteScreen");
   //audio
   document.querySelector("#bg_music").pause();
   document.querySelector("#yay").currentTime = 0;
@@ -262,7 +262,7 @@ function startGame() {
   load();
 }
 function unloadGame() {
-  console.log("restarting...");
+  // console.log("restarting...");
   gameState = "load";
   for (let i = 1; i <= 13; i++) {
     document.querySelector(`#timer_cookie${i}`).classList.remove("cookie_timer");
@@ -283,7 +283,6 @@ async function getHighscores() {
   });
   const dataList = await rawData.json();
   const readyData = prepareScoreData(dataList);
-  console.log(readyData);
   showScoreList(sortScores(readyData));
 }
 function sortScores(array) {
@@ -291,7 +290,6 @@ function sortScores(array) {
 }
 function showScoreList(array) {
   for (let i = 0; i < 10 && i < array.length; i++) {
-    console.log(i);
     const element = /*HTML*/ `
     <li>${array[i].score} by ${array[i].name}</li>
     `;
@@ -300,7 +298,7 @@ function showScoreList(array) {
 }
 
 function submitScore(event) {
-  console.log("submit clicked");
+  // console.log("submit clicked");
   event.preventDefault();
   const name = document.querySelector("#name").value;
   if (name.length != 0 && name.length < 12) sendScore(name, score, window.location.href);
