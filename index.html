@@ -79,15 +79,35 @@
         <p>Få 25 point inden tiden løber ud, undgå at miste alle dine liv!</p>
         <button id="startButton">Start</button>
       </div>
+
       <div id="game_over" class="hidden">
         <h1>U frikking frik ╰（‵□′）╯</h1>
         <img src="images/SadRestart.png" id="gameOverRestart" class="pulse" />
       </div>
       <div id="level_complete" class="hidden">
-        <h1>Yay! ☆*: .｡. o(≧▽≦)o .｡.:*☆</h1>
-        <h2 id="score">Ahhhh</h2>
-        <img src="images/HappyRestart.png" id="lvCompleteRestart" class="pulse" />
-        <h3 id="highscore">Highscore=</h3>
+        <div>
+          <h1>Yay! ☆*: .｡. o(≧▽≦)o .｡.:*☆</h1>
+          <h2 id="score">Ahhhh</h2>
+          <img src="images/HappyRestart.png" id="lvCompleteRestart" class="pulse" />
+        </div>
+        <div>
+          <form action="" id="scoreForm">
+            <fieldset>
+              <legend id="highscore">Highscore=</legend>
+              <label for="submitName">
+                Please insert your name:
+                <input type="text" id="name" required />
+                <input type="submit" id="submitName" />
+              </label>
+            </fieldset>
+          </form>
+          <fieldset>
+            <legend>Higscore list</legend>
+            <div>
+              <ol id="highscoreList"></ol>
+            </div>
+          </fieldset>
+        </div>
       </div>
       <div id="transitionCookies">
         <img src="images/SmallCookie.png" alt="gameOverCookie" id="gameOverCookie1" />

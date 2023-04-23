@@ -10,13 +10,16 @@ let timer_state = 1;
 let highscore = 0;
 let gameState;
 let requiredScore = 25;
+let highscoreArray = [];
+const url = "https://cookersbase-default-rtdb.europe-west1.firebasedatabase.app/";
 
-let cookieObj1 = document.querySelector("#cookie_container1");
-let cookieObj2 = document.querySelector("#cookie_container2");
-let cookieObj3 = document.querySelector("#cookie_container3");
-let cookieObj4 = document.querySelector("#cookie_container4");
-let cookieObj5 = document.querySelector("#cookie_container5");
-let cookieObj6 = document.querySelector("#cookie_container6");
+const cookieObj1 = document.querySelector("#cookie_container1");
+const cookieObj2 = document.querySelector("#cookie_container2");
+const cookieObj3 = document.querySelector("#cookie_container3");
+const cookieObj4 = document.querySelector("#cookie_container4");
+const cookieObj5 = document.querySelector("#cookie_container5");
+const cookieObj6 = document.querySelector("#cookie_container6");
+const cookieObjList = [cookieObj1, cookieObj2, cookieObj3, cookieObj4, cookieObj5, cookieObj6];
 
 //startscreen
 function load() {
@@ -25,6 +28,7 @@ function load() {
   let startButton = document.querySelector("#startButton");
   document.querySelector("#start").classList.remove("hidden");
   startButton.addEventListener("click", start);
+  //startButton.addEventListener("click", level_complete);
 
   //extra
   document.querySelector("#transitionCookies").classList.add("hidden");
@@ -36,6 +40,7 @@ function start() {
   lives = 3;
   timer_state = 1;
   updateScore();
+
   //remove start screen
   document.querySelector("#startButton").removeEventListener("click", start);
   document.querySelector("#start").classList.add("hidden");
@@ -52,27 +57,19 @@ function start() {
 }
 
 function initCookies() {
-  startCookie.call(cookieObj1);
-  startCookie.call(cookieObj2);
-  startCookie.call(cookieObj3);
-  startCookie.call(cookieObj4);
-  startCookie.call(cookieObj5);
-  startCookie.call(cookieObj6);
-
-  //assign events
-  startEventListernes(cookieObj1);
-  startEventListernes(cookieObj2);
-  startEventListernes(cookieObj3);
-  startEventListernes(cookieObj4);
-  startEventListernes(cookieObj5);
-  startEventListernes(cookieObj6);
+  for (let i = 0; i <= 5; i++) {
+    //start animations
+    startCookie.call(cookieObjList[i]);
+    //assign events
+    startEventListernes(cookieObjList[i]);
+  }
 }
 
 function startEventListernes(cookieObj) {
-  //Animation end listeners
+  //animation end listeners
   cookieObj.addEventListener("animationend", startCookie);
 
-  //Click listeners
+  //click listeners
   if (gameState != "load") cookieObj.addEventListener("mousedown", cookieClicker);
 }
 //timer animation hjælper
@@ -135,16 +132,7 @@ function startCookie() {
 
 //remove paths
 function removePaths(cookieObj) {
-  cookieObj.classList.remove(
-    "path1",
-    "path2",
-    "path3",
-    "path4",
-    "path5",
-    "path6",
-    "path7",
-    "path8"
-  );
+  cookieObj.classList.remove("path1", "path2", "path3", "path4", "path5", "path6", "path7", "path8");
 }
 
 //assign paths
@@ -217,9 +205,7 @@ function level_complete() {
   document.querySelector("#gameOverCookie1").classList.add("cookieTransition");
   document.querySelector("#gameOverCookie2").classList.add("cookieTransition");
   document.querySelector("#lvCompleteRestart").addEventListener("click", startGame);
-  document
-    .querySelector("#gameOverCookie2")
-    .addEventListener("animationend", showLevelCompleteScreen);
+  document.querySelector("#gameOverCookie2").addEventListener("animationend", showLevelCompleteScreen);
   if (score > highscore) {
     highscore = score;
   }
@@ -233,14 +219,15 @@ function showLevelCompleteScreen() {
   document.querySelector("#yay").currentTime = 0;
   document.querySelector("#yay").play();
 
-  document
-    .querySelector("#gameOverCookie2")
-    .removeEventListener("animationend", showLevelCompleteScreen);
+  document.querySelector("#gameOverCookie2").removeEventListener("animationend", showLevelCompleteScreen);
+  for (let i = 1; i <= 2; i++) {
+    document.querySelector(`#gameOverCookie${i}`).classList.remove("cookieTransition");
+    document.querySelector(`#gameOverCookie${i}`).classList.add("clicked");
+  }
+  document.querySelector("#submitName").disabled = false;
+  document.querySelector("#scoreForm").addEventListener("submit", submitScore);
+  getHighscores();
 
-  document.querySelector("#gameOverCookie1").classList.remove("cookieTransition");
-  document.querySelector("#gameOverCookie2").classList.remove("cookieTransition");
-  document.querySelector("#gameOverCookie1").classList.add("clicked");
-  document.querySelector("#gameOverCookie2").classList.add("clicked");
   document.querySelector("#level_complete").classList.remove("hidden");
 }
 
@@ -259,13 +246,11 @@ function showGameOverScreen() {
   document.querySelector("#bg_music").pause();
   document.querySelector("#cry").currentTime = 0;
   document.querySelector("#cry").play();
-  document
-    .querySelector("#gameOverCookie2")
-    .removeEventListener("animationend", showGameOverScreen);
-  document.querySelector("#gameOverCookie1").classList.remove("cookieTransition");
-  document.querySelector("#gameOverCookie2").classList.remove("cookieTransition");
-  document.querySelector("#gameOverCookie1").classList.add("clicked");
-  document.querySelector("#gameOverCookie2").classList.add("clicked");
+  for (let i = 1; i <= 2; i++) {
+    document.querySelector(`#gameOverCookie${i}`).classList.remove("cookieTransition");
+    document.querySelector(`#gameOverCookie${i}`).classList.add("clicked");
+  }
+  document.querySelector("#gameOverCookie2").removeEventListener("animationend", showGameOverScreen);
   document.querySelector("#game_over").classList.remove("hidden");
 }
 
@@ -279,28 +264,65 @@ function startGame() {
 function unloadGame() {
   console.log("restarting...");
   gameState = "load";
-  document.querySelector("#timer_cookie1").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie2").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie3").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie4").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie5").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie6").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie7").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie8").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie9").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie10").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie11").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie12").classList.remove("cookie_timer");
-  document.querySelector("#timer_cookie13").classList.remove("cookie_timer");
+  for (let i = 1; i <= 13; i++) {
+    document.querySelector(`#timer_cookie${i}`).classList.remove("cookie_timer");
+  }
 
-  cookieObj1.removeEventListener("mousedown", cookieClicker);
-  cookieObj2.removeEventListener("mousedown", cookieClicker);
-  cookieObj3.removeEventListener("mousedown", cookieClicker);
-  cookieObj4.removeEventListener("mousedown", cookieClicker);
-  cookieObj5.removeEventListener("mousedown", cookieClicker);
-  cookieObj6.removeEventListener("mousedown", cookieClicker);
+  for (var i = 0; i < 6; i++) {
+    cookieObjList[i].removeEventListener("mousedown", cookieClicker);
+  }
 
   addLives();
   addLives();
   addLives();
+}
+async function getHighscores() {
+  const rawData = await fetch(`${url}/posts.json`, {
+    method: "GET",
+  });
+  const dataList = await rawData.json();
+  const readyData = prepareScoreData(dataList);
+  console.log(readyData);
+  showScoreList(sortScores(readyData));
+}
+function sortScores(array) {
+  return array.sort((a, b) => b.score - a.score);
+}
+function showScoreList(array) {
+  for (let i = 0; i < 10 && i < array.length; i++) {
+    console.log(i);
+    const element = /*HTML*/ `
+    <li>${array[i].score} by ${array[i].name}</li>
+    `;
+    document.querySelector("#highscoreList").insertAdjacentHTML("beforeend", element);
+  }
+}
+
+function submitScore(event) {
+  console.log("submit clicked");
+  event.preventDefault();
+  const name = document.querySelector("#name").value;
+  if (name.length != 0 && name.length < 12) sendScore(name, score, window.location.href);
+}
+
+async function sendScore(name, score, credentials) {
+  document.querySelector("#submitName").disabled = true;
+  const scoreObj = {
+    name: `${name}`,
+    score: `${score}`,
+    credentials: `${credentials}`,
+  };
+  const scoreToJson = JSON.stringify(scoreObj);
+  const response = await fetch(`${url}/posts.json`, {
+    method: "POST",
+    body: scoreToJson,
+  });
+}
+function prepareScoreData(dataObject) {
+  const scoreArray = [];
+  for (const key in dataObject) {
+    const score = dataObject[key];
+    scoreArray.push(score);
+  }
+  return scoreArray;
 }
