@@ -277,6 +277,7 @@ function unloadGame() {
   addLives();
 }
 async function getHighscores() {
+  document.querySelector("#highscoreList").textContent = "";
   const rawData = await fetch(`${url}/posts.json`, {
     method: "GET",
   });
@@ -307,6 +308,7 @@ function submitScore(event) {
 
 async function sendScore(name, score, credentials) {
   document.querySelector("#submitName").disabled = true;
+
   const scoreObj = {
     name: `${name}`,
     score: `${score}`,
@@ -317,6 +319,7 @@ async function sendScore(name, score, credentials) {
     method: "POST",
     body: scoreToJson,
   });
+  getHighscores();
 }
 function prepareScoreData(dataObject) {
   const scoreArray = [];
