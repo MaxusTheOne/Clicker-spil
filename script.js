@@ -205,10 +205,6 @@ function level_complete() {
   document.querySelector("#gameOverCookie2").classList.add("cookieTransition");
   document.querySelector("#lvCompleteRestart").addEventListener("click", startGame);
   document.querySelector("#gameOverCookie2").addEventListener("animationend", showLevelCompleteScreen);
-  if (score > highscore) {
-    highscore = score;
-  }
-  document.querySelector("#highscore").textContent = "Highscore: " + highscore;
   unloadGame();
 }
 function showLevelCompleteScreen() {
