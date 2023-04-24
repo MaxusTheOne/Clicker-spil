@@ -269,10 +269,7 @@ function unloadGame() {
   for (var i = 0; i < 6; i++) {
     cookieObjList[i].removeEventListener("mousedown", cookieClicker);
   }
-
-  addLives();
-  addLives();
-  addLives();
+  for (let i = 0; i <= 3; i++) addLives();
 }
 async function getHighscores() {
   document.querySelector("#highscoreList").textContent = "";
