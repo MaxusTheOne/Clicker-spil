@@ -7,10 +7,8 @@ window.addEventListener("load", load);
 let score = 0;
 let lives = 3;
 let timer_state = 1;
-let highscore = 0;
 let gameState;
 let requiredScore = 25;
-let highscoreArray = [];
 const url = "https://cookersbase-default-rtdb.europe-west1.firebasedatabase.app/";
 
 const cookieObj1 = document.querySelector("#cookie_container1");
