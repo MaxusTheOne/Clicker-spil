@@ -75,10 +75,10 @@ function startEventListernes(cookieObj) {
 //timer animation hjælper
 function timerStep() {
   let timer_cookie = document.querySelector("#timer_cookie" + timer_state);
-
+  timer_state++;
   timer_cookie.removeEventListener("animationend", timerStep);
   if (timer_state < 13) {
-    timer_cookie = document.querySelector("#timer_cookie" + timer_state++);
+    timer_cookie = document.querySelector("#timer_cookie" + timer_state);
     timer_cookie.classList.add("cookie_timer");
     timer_cookie.addEventListener("animationend", timerStep);
   } else {
