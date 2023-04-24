@@ -173,7 +173,8 @@ function removeLives() {
 //add a life
 function addLives() {
   if (lives < 3) {
-    let lifeObj = document.querySelector("#heart" + lives++);
+    lives++;
+    let lifeObj = document.querySelector("#heart" + lives);
     lifeObj.classList.remove("clicked");
   }
 }
