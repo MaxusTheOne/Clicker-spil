@@ -301,7 +301,7 @@ function submitScore(event) {
   // console.log("submit clicked");
   event.preventDefault();
   const name = document.querySelector("#name").value;
-  if (name.length != 0 && name.length < 12) sendScore(name, score, window.location.href);
+  if (name.length != 0 && name.length < 20) sendScore(name, score, window.location.href);
 }
 
 async function sendScore(name, score, credentials) {
