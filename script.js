@@ -78,8 +78,7 @@ function timerStep() {
 
   timer_cookie.removeEventListener("animationend", timerStep);
   if (timer_state < 13) {
-    timer_state++;
-    timer_cookie = document.querySelector("#timer_cookie" + timer_state);
+    timer_cookie = document.querySelector("#timer_cookie" + timer_state++);
     timer_cookie.classList.add("cookie_timer");
     timer_cookie.addEventListener("animationend", timerStep);
   } else {
@@ -174,8 +173,7 @@ function removeLives() {
 //add a life
 function addLives() {
   if (lives < 3) {
-    lives++;
-    let lifeObj = document.querySelector("#heart" + lives);
+    let lifeObj = document.querySelector("#heart" + lives++);
     lifeObj.classList.remove("clicked");
   }
 }
