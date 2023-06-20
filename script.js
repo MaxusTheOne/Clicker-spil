@@ -11,24 +11,18 @@ let gameState;
 let requiredScore = 25;
 const url = "https://cookersbase-default-rtdb.europe-west1.firebasedatabase.app/";
 
-const cookieObj1 = document.querySelector("#cookie_container1");
-const cookieObj2 = document.querySelector("#cookie_container2");
-const cookieObj3 = document.querySelector("#cookie_container3");
-const cookieObj4 = document.querySelector("#cookie_container4");
-const cookieObj5 = document.querySelector("#cookie_container5");
-const cookieObj6 = document.querySelector("#cookie_container6");
-const cookieObjList = [cookieObj1, cookieObj2, cookieObj3, cookieObj4, cookieObj5, cookieObj6];
+const cookieObjList = [];
 
 //startscreen
 function load() {
   gameState = "load";
-  initCookies();
   let startButton = document.querySelector("#startButton");
   document.querySelector("#start").classList.remove("hidden");
   startButton.addEventListener("click", start);
   //startButton.addEventListener("click", level_complete);
   //create cookies
-
+  createCookies(5)
+  initCookies();
   //extra
   document.querySelector("#transitionCookies").classList.add("hidden");
 }
@@ -36,11 +30,12 @@ function load() {
 function createCookies(cookieCount){
   for (let i = 0; i < cookieCount; i++){
     const cookieHTML = /*HTML*/ `
-      <div id="cookie_container1" class="cookie_container">
-        <img src="images/SmallCookie.png" id="cookie_img1" class="cookie_img" />
+      <div id="cookie_container${i}" class="cookie_container">
+        <img src="images/SmallCookie.png" id="cookie_sprite${i}" class="cookie_sprite" />
       </div>
     `
-    
+    document.querySelector("#cookie_container_container").insertAdjacentHTML("beforeend",cookieHTML)
+    cookieObjList.push(document.querySelector("#cookie_container_container div:last-child"))
   }
 }
 function start() {
@@ -66,7 +61,7 @@ function start() {
 }
 
 function initCookies() {
-  for (let i = 0; i <= 5; i++) {
+  for (let i = 0; i < cookieObjList.length; i++) {
     //start animations
     startCookie.call(cookieObjList[i]);
     //assign events
