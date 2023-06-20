@@ -27,11 +27,22 @@ function load() {
   document.querySelector("#start").classList.remove("hidden");
   startButton.addEventListener("click", start);
   //startButton.addEventListener("click", level_complete);
+  //create cookies
 
   //extra
   document.querySelector("#transitionCookies").classList.add("hidden");
 }
 
+function createCookies(cookieCount){
+  for (let i = 0; i < cookieCount; i++){
+    const cookieHTML = /*HTML*/ `
+      <div id="cookie_container1" class="cookie_container">
+        <img src="images/SmallCookie.png" id="cookie_img1" class="cookie_img" />
+      </div>
+    `
+    
+  }
+}
 function start() {
   //reset variables
   score = 0;
