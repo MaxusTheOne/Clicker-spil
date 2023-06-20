@@ -18,7 +18,7 @@ function load() {
   gameState = "load";
   let startButton = document.querySelector("#startButton");
   document.querySelector("#start").classList.remove("hidden");
-  startButton.addEventListener("click", start);
+  startButton.addEventListener("click", start,{once: true});
   //startButton.addEventListener("click", level_complete);
   //create cookies
   createCookies(5)
@@ -28,7 +28,8 @@ function load() {
 }
 
 function createCookies(cookieCount){
-  for (let i = 0; i < cookieCount; i++){
+  document.querySelector("#cookie_container_container").textContent = ""
+  for (let i = 0; i <= cookieCount; i++){
     const cookieHTML = /*HTML*/ `
       <div id="cookie_container${i}" class="cookie_container">
         <img src="images/SmallCookie.png" id="cookie_sprite${i}" class="cookie_sprite" />
@@ -46,7 +47,6 @@ function start() {
   updateScore();
 
   //remove start screen
-  document.querySelector("#startButton").removeEventListener("click", start);
   document.querySelector("#start").classList.add("hidden");
   gameState = "playing";
   //start cookies
@@ -57,7 +57,7 @@ function start() {
   document.querySelector("#bg_music").play();
 
   document.querySelector("#timer_cookie1").classList.add("cookie_timer");
-  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep);
+  document.querySelector("#timer_cookie1").addEventListener("animationend", timerStep,{once: true});
 }
 
 function initCookies() {
@@ -74,17 +74,16 @@ function startEventListernes(cookieObj) {
   cookieObj.addEventListener("animationend", startCookie);
 
   //click listeners
-  if (gameState != "load") cookieObj.addEventListener("mousedown", cookieClicker);
+  if (gameState != "load") cookieObj.addEventListener("mousedown", cookieClicker,{once: true});
 }
 //timer animation hjælper
 function timerStep() {
   let timer_cookie = document.querySelector("#timer_cookie" + timer_state);
   timer_state++;
-  timer_cookie.removeEventListener("animationend", timerStep);
   if (timer_state < 13) {
     timer_cookie = document.querySelector("#timer_cookie" + timer_state);
     timer_cookie.classList.add("cookie_timer");
-    timer_cookie.addEventListener("animationend", timerStep);
+    timer_cookie.addEventListener("animationend", timerStep,{once: true});
   } else {
     endGame();
   }
@@ -93,7 +92,6 @@ function timerStep() {
 //får cookien til at forsvinde når de bliver klikket
 function cookieClicker() {
   let cookie_container = this;
-  cookie_container.removeEventListener("mousedown", cookieClicker);
   cookie_container.classList.add("pause");
   cookie_container.querySelector("img").classList.add("clicked");
   document.querySelector("#munch1").currentTime = 0;
@@ -207,8 +205,8 @@ function level_complete() {
   document.querySelector("#transitionCookies").classList.remove("hidden");
   document.querySelector("#gameOverCookie1").classList.add("cookieTransition");
   document.querySelector("#gameOverCookie2").classList.add("cookieTransition");
-  document.querySelector("#lvCompleteRestart").addEventListener("click", startGame);
-  document.querySelector("#gameOverCookie2").addEventListener("animationend", showLevelCompleteScreen);
+  document.querySelector("#lvCompleteRestart").addEventListener("click", startGame,{once: true});
+  document.querySelector("#gameOverCookie2").addEventListener("animationend", showLevelCompleteScreen,{once: true});
   unloadGame();
 }
 function showLevelCompleteScreen() {
@@ -218,7 +216,6 @@ function showLevelCompleteScreen() {
   document.querySelector("#yay").currentTime = 0;
   document.querySelector("#yay").play();
 
-  document.querySelector("#gameOverCookie2").removeEventListener("animationend", showLevelCompleteScreen);
   for (let i = 1; i <= 2; i++) {
     document.querySelector(`#gameOverCookie${i}`).classList.remove("cookieTransition");
     document.querySelector(`#gameOverCookie${i}`).classList.add("clicked");
@@ -236,8 +233,8 @@ function game_over() {
   document.querySelector("#gameOverCookie1").classList.add("cookieTransition");
   document.querySelector("#gameOverCookie2").classList.add("cookieTransition");
   document.querySelector("#transitionCookies").classList.remove("hidden");
-  document.querySelector("#gameOverCookie2").addEventListener("animationend", showGameOverScreen);
-  document.querySelector("#gameOverRestart").addEventListener("click", startGame);
+  document.querySelector("#gameOverCookie2").addEventListener("animationend", showGameOverScreen,{once: true});
+  document.querySelector("#gameOverRestart").addEventListener("click", startGame,{once: true});
   unloadGame();
 }
 function showGameOverScreen() {
@@ -249,13 +246,10 @@ function showGameOverScreen() {
     document.querySelector(`#gameOverCookie${i}`).classList.remove("cookieTransition");
     document.querySelector(`#gameOverCookie${i}`).classList.add("clicked");
   }
-  document.querySelector("#gameOverCookie2").removeEventListener("animationend", showGameOverScreen);
   document.querySelector("#game_over").classList.remove("hidden");
 }
 
 function startGame() {
-  document.querySelector("#gameOverRestart").removeEventListener("click", unloadGame);
-  document.querySelector("#lvCompleteRestart").removeEventListener("click", unloadGame);
   document.querySelector("#game_over").classList.add("hidden");
   document.querySelector("#level_complete").classList.add("hidden");
   load();
@@ -267,7 +261,7 @@ function unloadGame() {
     document.querySelector(`#timer_cookie${i}`).classList.remove("cookie_timer");
   }
 
-  for (var i = 0; i < 6; i++) {
+  for (var i = 0; i < cookieObjList.length; i++) {
     cookieObjList[i].removeEventListener("mousedown", cookieClicker);
   }
   for (let i = 0; i <= 3; i++) addLives();
